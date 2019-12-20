@@ -1,5 +1,6 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity("tblBuyer")
 export class Buyer extends BaseEntity {
     @PrimaryGeneratedColumn("increment")
     id: number;

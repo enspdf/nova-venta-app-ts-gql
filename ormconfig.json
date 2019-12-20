@@ -31,10 +31,10 @@
       "host": "localhost",
       "port": 3306,
       "username": "root",
-      "password": "",
+      "password": "vertical601",
       "database": "novaVentaAppDev",
-      "synchronize": false,
-      "dropSchema": false,
+      "synchronize": true,
+      "dropSchema": true,
       "logging": false,
       "entities": [
          "src/entity/**/*.ts"

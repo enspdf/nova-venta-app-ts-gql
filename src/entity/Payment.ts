@@ -1,8 +1,9 @@
-import { User } from './User';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Buyer } from './Buyer';
-import { Vendor } from './Vendor';
 import { Campaign } from './Campaign';
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { User } from './User';
+import { Vendor } from './Vendor';
 
 @Entity("tblPayment")
 export class Payment extends BaseEntity {
