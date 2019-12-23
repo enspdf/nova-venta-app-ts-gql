@@ -8,8 +8,14 @@ import * as cookieParser from "cookie-parser";
 import * as cors from "cors";
 import * as express from "express";
 import * as session from "express-session";
+import * as typeorm from "typeorm";
+import { useContainer } from "typeorm"
+import { Container } from "typedi";
 
 import { createTypeOrmConnection } from "./utils/CreateTypeOrmConnection";
+
+useContainer(Container);
+typeorm.useContainer(Container);
 
 (async () => {
     const app = express();

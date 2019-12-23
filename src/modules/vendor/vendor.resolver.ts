@@ -2,17 +2,16 @@ import { CreateVendorInput } from './input/CreateVendorInput.input';
 import { VendorService } from './vendor.service';
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import { Vendor } from "../../entity/Vendor";
-import { Inject } from 'typedi';
+import { Service } from 'typedi';
 
+@Service()
 @Resolver(of => Vendor)
 export class VendorResolver {
-    @Inject()
-    vendorService: VendorService;
+    constructor(private readonly vendorService: VendorService) { }
 
     @Mutation(returns => Boolean)
     async createVendor(@Arg("input") createVendorInput: CreateVendorInput): Promise<Boolean> {
         const { name, active } = createVendorInput;
-        console.log(name, active);
         return this.vendorService.createVendor(name, active);
     }
 
