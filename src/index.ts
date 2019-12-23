@@ -1,14 +1,15 @@
-import 'dotenv/config';
-import 'reflect-metadata';
+import "reflect-metadata";
+import { createSchema } from "./utils/CreateSchema";
+import "dotenv/config";
 
-import { ApolloServer } from 'apollo-server';
-import * as connectRedis from 'connect-redis';
-import * as cookieParser from 'cookie-parser';
-import * as cors from 'cors';
-import * as express from 'express';
-import * as session from 'express-session';
+import { ApolloServer } from "apollo-server";
+import * as connectRedis from "connect-redis";
+import * as cookieParser from "cookie-parser";
+import * as cors from "cors";
+import * as express from "express";
+import * as session from "express-session";
 
-import { createTypeOrmConnection } from './utils/CreateTypeOrmConnection';
+import { createTypeOrmConnection } from "./utils/CreateTypeOrmConnection";
 
 (async () => {
     const app = express();
@@ -18,26 +19,10 @@ import { createTypeOrmConnection } from './utils/CreateTypeOrmConnection';
     app.use(cors());
 
     await createTypeOrmConnection();
+    const schema = await createSchema();
 
     const server = new ApolloServer({
-        typeDefs: `
-            type Hello {
-                message: String!
-            }
-
-            type Query {
-                sayHello(name: String!): Hello
-            }
-        `,
-        resolvers: {
-            Query: {
-                sayHello: (_, args) => {
-                    return {
-                        message: `Hello ${args.name || "World"}`
-                    };
-                }
-            }
-        },
+        schema,
         context: ({ req, res }) => ({ req, res }),
         formatError: error => {
             const { message, extensions, path } = error;
