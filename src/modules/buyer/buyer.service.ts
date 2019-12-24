@@ -15,51 +15,53 @@ export class BuyerService {
     async createBuyer(name: string, active: boolean): Promise<Boolean> {
         try {
             await this.buyerRepository.insert({ name, active });
-            return true;
-        } catch {
+        } catch (err) {
+            console.log(err);
             return false;
         }
+
+        return true;
     }
 
     async deleteBuyer(id: number): Promise<Boolean> {
         try {
             await this.buyerRepository.delete({ id });
-            return true;
-        } catch {
+        } catch (err) {
+            console.log(err);
             return false;
         }
+
+        return true;
     }
 
-    async updateBuyer(id: number, buyerInput: BuyerInput): Promise<Boolean> {
+    async updateBuyer(id: number, buyerInput: BuyerInput): Promise<Buyer | null> {
         try {
             const buyer = await this.buyerRepository.findOne({ where: { id } });
-            const buyerToUpdate = { ...buyer, ...buyerInput };
-            await this.buyerRepository.save(buyerToUpdate);
-            return true;
-        } catch {
-            return false;
+            return await this.buyerRepository.save({
+                ...buyer,
+                ...buyerInput
+            })
+        } catch (err) {
+            console.log(err);
+            return null;
         }
     }
 
-    async getAllBuyers(): Promise<Buyer[]> {
-        let buyers: Buyer[] = [];
-
+    async getAllBuyers(): Promise<Buyer[] | null> {
         try {
-            buyers = await this.buyerRepository.find();
-            return buyers;
-        } catch {
-            return buyers;
+            return await this.buyerRepository.find();
+        } catch (err) {
+            console.log(err);
+            return null;
         }
     }
 
-    async getBuyerById(id: number): Promise<Buyer> {
-        let buyer: Buyer;
-
+    async getBuyerById(id: number): Promise<Buyer | null> {
         try {
-            buyer = await this.buyerRepository.findOne({ where: { id } });
-            return buyer;
-        } catch {
-            return buyer;
+            return await this.buyerRepository.findOne({ where: { id } });
+        } catch (err) {
+            console.log(err);
+            return null;
         }
     }
 }

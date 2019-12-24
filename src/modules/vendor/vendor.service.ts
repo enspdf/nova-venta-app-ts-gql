@@ -15,51 +15,53 @@ export class VendorService {
     async createVendor(name: string, active: boolean): Promise<Boolean> {
         try {
             await this.vendorRepository.insert({ name, active });
-            return true;
-        } catch {
+        } catch (err) {
+            console.log(err);
             return false;
         }
+
+        return true;
     }
 
     async deleteVendor(id: number): Promise<Boolean> {
         try {
             await this.vendorRepository.delete({ id });
-            return true;
-        } catch {
+        } catch (err) {
+            console.log(err);
             return false;
         }
+
+        return true;
     }
 
-    async updateVendor(id: number, vendorInput: VendorInput): Promise<Boolean> {
+    async updateVendor(id: number, vendorInput: VendorInput): Promise<Vendor | null> {
         try {
             const vendor = await this.vendorRepository.findOne({ where: { id } });
-            const vendorToUpdate = { ...vendor, ...vendorInput };
-            await this.vendorRepository.save(vendorToUpdate);
-            return true;
-        } catch {
-            return false;
+            return await this.vendorRepository.save({
+                ...vendor,
+                ...vendorInput
+            });
+        } catch (err) {
+            console.log(err);
+            return null;
         }
     }
 
-    async getAllVendors(): Promise<Vendor[]> {
-        let vendors: Vendor[] = []
-
+    async getAllVendors(): Promise<Vendor[] | null> {
         try {
-            vendors = await this.vendorRepository.find();
-            return vendors;
-        } catch {
-            return vendors;
+            return await this.vendorRepository.find();
+        } catch (err) {
+            console.log(err);
+            return null;
         }
     }
 
-    async getVendorById(id: number): Promise<Vendor> {
-        let vendor: Vendor;
-
+    async getVendorById(id: number): Promise<Vendor | null> {
         try {
-            vendor = await this.vendorRepository.findOne({ where: { id } });
-            return vendor;
-        } catch {
-            return vendor;
+            return await this.vendorRepository.findOne({ where: { id } });
+        } catch (err) {
+            console.log(err);
+            return null;
         }
     }
 }

@@ -20,18 +20,18 @@ export class BuyerResolver {
         return this.buyerService.deleteBuyer(id);
     }
 
-    @Mutation(returns => Boolean)
-    async updateBuyer(@Arg("id") id: number, @Arg("input") buyerInput: BuyerInput): Promise<Boolean> {
+    @Mutation(returns => Buyer, { nullable: true })
+    async updateBuyer(@Arg("id") id: number, @Arg("input") buyerInput: BuyerInput): Promise<Buyer | null> {
         return this.buyerService.updateBuyer(id, buyerInput);
     }
 
-    @Query(returns => [Buyer])
-    async getAllBuyers(): Promise<Buyer[]> {
+    @Query(returns => [Buyer], { nullable: true })
+    async getAllBuyers(): Promise<Buyer[] | null> {
         return this.buyerService.getAllBuyers();
     }
 
-    @Query(returns => Buyer)
-    async getBuyerById(@Arg("id") id: number): Promise<Buyer> {
+    @Query(returns => Buyer, { nullable: true })
+    async getBuyerById(@Arg("id") id: number): Promise<Buyer | null> {
         return this.buyerService.getBuyerById(id);
     }
 }

@@ -21,18 +21,18 @@ export class VendorResolver {
         return this.vendorService.deleteVendor(id);
     }
 
-    @Mutation(returns => Boolean)
-    async updateVendor(@Arg("id") id: number, @Arg("input") vendorInput: VendorInput) {
+    @Mutation(returns => Vendor, { nullable: true })
+    async updateVendor(@Arg("id") id: number, @Arg("input") vendorInput: VendorInput): Promise<Vendor | null> {
         return this.vendorService.updateVendor(id, vendorInput);
     }
 
-    @Query(returns => [Vendor])
-    async getAllVendors(): Promise<Vendor[]> {
+    @Query(returns => [Vendor], { nullable: true })
+    async getAllVendors(): Promise<Vendor[] | null> {
         return this.vendorService.getAllVendors();
     }
 
-    @Query(returns => Vendor)
-    async getVendorById(@Arg("id") id: number): Promise<Vendor> {
+    @Query(returns => Vendor, { nullable: true })
+    async getVendorById(@Arg("id") id: number): Promise<Vendor | null> {
         return this.vendorService.getVendorById(id);
     }
 }
