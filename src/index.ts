@@ -3,19 +3,18 @@ import { createSchema } from "./utils/CreateSchema";
 import "dotenv/config";
 
 import { ApolloServer } from "apollo-server";
-import * as connectRedis from "connect-redis";
-import * as cookieParser from "cookie-parser";
-import * as cors from "cors";
-import * as express from "express";
-import * as session from "express-session";
-import * as typeorm from "typeorm";
+import connectRedis from "connect-redis";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import express from "express";
+import session from "express-session";
+import typeorm from "typeorm";
 import { useContainer } from "typeorm"
 import { Container } from "typedi";
 
 import { createTypeOrmConnection } from "./utils/CreateTypeOrmConnection";
 
 useContainer(Container);
-typeorm.useContainer(Container);
 
 (async () => {
     const app = express();
