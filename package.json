@@ -41,6 +41,7 @@
       "uuid": "^3.3.3"
    },
    "scripts": {
-      "start": "nodemon --exec ts-node src/index.ts"
+      "start": "nodemon --exec ts-node src/index.ts",
+      "start:pdn": "NODE_ENV=production ts-node src/index.ts"
    }
 }
