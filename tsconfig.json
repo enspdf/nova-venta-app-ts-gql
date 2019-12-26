@@ -12,10 +12,7 @@
       "outDir": "./dist",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "skipLibCheck": true,
+      "sourceMap": true
    },
    "exclude": [
       "node_modules"
@@ -23,5 +20,5 @@
    "include": [
       "./src/**/*.tsx",
       "./src/**/*.ts"
-   ],
+   ]
 }

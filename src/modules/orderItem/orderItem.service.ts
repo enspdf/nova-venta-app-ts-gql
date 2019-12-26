@@ -1,18 +1,16 @@
-import { Service } from 'typedi';
-import { InjectRepository } from 'typeorm-typedi-extensions';
-
-import { UserRepository } from '../user/user.repository';
+import { UpdateOrderItemInput } from './input/UpdateOrderItemInput.input';
+import { BuyerRepository } from './../buyer/buyer.repository';
+import { VendorRepository } from './../vendor/vendor.repository';
+import { CampaignRepository } from './../campaign/campaign.repository';
+import { User } from './../../entity/User';
 import { Buyer } from './../../entity/Buyer';
+import { Vendor } from './../../entity/Vendor';
 import { Campaign } from './../../entity/Campaign';
 import { OrderItem } from './../../entity/OrderItem';
-import { User } from './../../entity/User';
-import { Vendor } from './../../entity/Vendor';
-import { BuyerRepository } from './../buyer/buyer.repository';
-import { CampaignRepository } from './../campaign/campaign.repository';
-import { VendorRepository } from './../vendor/vendor.repository';
 import { OrderItemInput } from './input/OrderItemInput.input';
-import { UpdateOrderItemInput } from './input/UpdateOrderItemInput.input';
 import { OrderItemRepository } from './orderItem.repository';
+import { Service } from "typedi";
+import { InjectRepository } from "typeorm-typedi-extensions";
 
 @Service()
 export class OrderItemService {
@@ -27,10 +25,7 @@ export class OrderItemService {
         private readonly vendorRepository: VendorRepository,
 
         @InjectRepository()
-        private readonly buyerRepository: BuyerRepository,
-
-        @InjectRepository()
-        private readonly userRepository: UserRepository
+        private readonly buyerRepository: BuyerRepository
     ) { }
 
     async createOrderItem(orderItemInput: OrderItemInput): Promise<Boolean> {
@@ -38,7 +33,7 @@ export class OrderItemService {
             const campaign: Campaign = await this.campaignRepository.findOne({ where: { id: orderItemInput.campaignId } });
             const vendor: Vendor = await this.vendorRepository.findOne({ where: { id: orderItemInput.vendorId } });
             const buyer: Buyer = await this.buyerRepository.findOne({ where: { id: orderItemInput.buyerId } });
-            //const user: User = await this.userRepository.findOne({ where: { id: orderItemInput.userId } });
+            //let user: User;
 
             await this.orderItemRepository.create({
                 ...orderItemInput,
