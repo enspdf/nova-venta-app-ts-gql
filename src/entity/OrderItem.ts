@@ -26,7 +26,7 @@ export class OrderItem extends BaseEntity {
     buyer: Buyer;
 
     @Field(type => User, { nullable: true })
-    @ManyToOne(() => User, user => user.id, { nullable: false })
+    @ManyToOne(() => User, user => user.id, { nullable: true })
     user: User;
 
     @Field(type => String)
