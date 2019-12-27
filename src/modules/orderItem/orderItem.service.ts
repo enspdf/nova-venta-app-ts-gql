@@ -81,7 +81,7 @@ export class OrderItemService {
 
     async getAllOrderItems(): Promise<OrderItem[] | null> {
         try {
-            return await this.orderItemRepository.find();
+            return await this.orderItemRepository.find({ relations: ["campaign", "vendor", "buyer", "user"] });
         } catch (err) {
             console.log(err);
             return null;
@@ -90,7 +90,7 @@ export class OrderItemService {
 
     async getOrderItemById(id: number): Promise<OrderItem | null> {
         try {
-            return await this.orderItemRepository.findOne({ where: { id } });
+            return await this.orderItemRepository.findOne({ where: { id }, relations: ["campaign", "vendor", "buyer", "user"] });
         } catch (err) {
             console.log(err);
             return null;
