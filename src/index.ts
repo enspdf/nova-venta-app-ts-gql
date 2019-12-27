@@ -37,6 +37,8 @@ useContainer(Container);
         playground: true
     });
 
-    const { url } = await server.listen(process.env.PORT || 4000);
+    const PORT = process.env.PORT || 4000;
+
+    const { url } = await server.listen(PORT);
     console.log(`Server available at ${url}`);
 })();
