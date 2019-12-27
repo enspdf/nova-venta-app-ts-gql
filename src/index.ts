@@ -32,9 +32,11 @@ useContainer(Container);
         formatError: error => {
             const { message, extensions, path } = error;
             return { message, code: extensions.code, path };
-        }
+        },
+        introspection: true,
+        playground: true
     });
 
-    const { url } = await server.listen(4000);
+    const { url } = await server.listen(process.env.PORT || 4000);
     console.log(`Server available at ${url}`);
 })();

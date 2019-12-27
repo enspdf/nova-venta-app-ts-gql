@@ -43,5 +43,9 @@
    "scripts": {
       "start": "nodemon --exec ts-node src/index.ts",
       "start:pdn": "NODE_ENV=production ts-node src/index.ts"
-   }
+   },
+   "engines": {
+      "node": "12.x"
+   },
+   "type": "module"
 }
