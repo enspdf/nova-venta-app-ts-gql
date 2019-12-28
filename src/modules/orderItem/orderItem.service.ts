@@ -81,7 +81,13 @@ export class OrderItemService {
 
     async getAllOrderItems(): Promise<OrderItem[] | null> {
         try {
-            return await this.orderItemRepository.find({ relations: ["campaign", "vendor", "buyer", "user"] });
+            return await this.orderItemRepository
+                .createQueryBuilder("orderItem")
+                .innerJoinAndSelect("orderItem.campaign", "campaign")
+                .innerJoinAndSelect("orderItem.vendor", "vendor")
+                .innerJoinAndSelect("orderItem.buyer", "buyer")
+                .innerJoinAndSelect("orderItem.user", "user")
+                .getMany();
         } catch (err) {
             console.log(err);
             return null;
@@ -90,7 +96,14 @@ export class OrderItemService {
 
     async getOrderItemById(id: number): Promise<OrderItem | null> {
         try {
-            return await this.orderItemRepository.findOne({ where: { id }, relations: ["campaign", "vendor", "buyer", "user"] });
+            return await this.orderItemRepository
+                .createQueryBuilder("orderItem")
+                .innerJoinAndSelect("orderItem.campaign", "campaign")
+                .innerJoinAndSelect("orderItem.vendor", "vendor")
+                .innerJoinAndSelect("orderItem.buyer", "buyer")
+                .innerJoinAndSelect("orderItem.user", "user")
+                .where("orderItem.id = :orderItemId", { orderItemId: id })
+                .getOne();
         } catch (err) {
             console.log(err);
             return null;

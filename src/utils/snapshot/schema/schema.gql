@@ -32,6 +32,11 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type LoginResponse {
+  accessToken: String!
+  user: User!
+}
+
 type Mutation {
   createCampaign(input: CampaignInput!): Boolean!
   deleteCampaign(id: Float!): Boolean!
@@ -45,6 +50,8 @@ type Mutation {
   createOrderItem(input: OrderItemInput!): Boolean!
   deleteOrderItem(id: Float!): Boolean!
   updateOrderItem(input: UpdateOrderItemInput!, id: Float!): OrderItem
+  register(input: UserInput!): Boolean!
+  login(password: String!, email: String!): LoginResponse!
 }
 
 type OrderItem {
@@ -89,6 +96,7 @@ type Query {
   getBuyerById(id: Float!): Buyer
   getAllOrderItems: [OrderItem!]
   getOrderItemById(id: Float!): OrderItem
+  profile(id: Float!): User
 }
 
 input UpdateOrderItemInput {
@@ -107,8 +115,13 @@ type User {
   id: ID!
   name: String!
   email: String!
-  password: String!
   active: Boolean!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+  password: String!
 }
 
 type Vendor {

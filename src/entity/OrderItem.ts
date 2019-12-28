@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
 
 import { Buyer } from './Buyer';
 import { Campaign } from './Campaign';
@@ -15,18 +15,22 @@ export class OrderItem extends BaseEntity {
 
     @Field(type => Campaign, { nullable: true })
     @ManyToOne(() => Campaign, campaign => campaign.id, { nullable: false })
+    @JoinColumn()
     campaign: Campaign;
 
     @Field(type => Vendor, { nullable: true })
     @ManyToOne(() => Vendor, vendor => vendor.id, { nullable: false })
+    @JoinColumn()
     vendor: Vendor;
 
     @Field(type => Buyer, { nullable: true })
     @ManyToOne(() => Buyer, buyer => buyer.id, { nullable: false })
+    @JoinColumn()
     buyer: Buyer;
 
     @Field(type => User, { nullable: true })
     @ManyToOne(() => User, user => user.id, { nullable: true })
+    @JoinColumn()
     user: User;
 
     @Field(type => String)
@@ -46,11 +50,11 @@ export class OrderItem extends BaseEntity {
     quantity: number;
 
     @Field(type => Float, { defaultValue: 0.0 })
-    @Column("decimal")
+    @Column("decimal", { precision: 5, scale: 2 })
     cost: number;
 
     @Field(type => Float, { defaultValue: 0.0 })
-    @Column("decimal")
+    @Column("decimal", { precision: 5, scale: 2 })
     price: number;
 
     @Field(type => Date)

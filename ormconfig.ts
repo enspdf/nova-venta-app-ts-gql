@@ -28,7 +28,7 @@ const connectionOptions: ConnectionOptions[] = [
         host: "localhost",
         port: 3306,
         username: "root",
-        password: "vertical601",
+        password: "",
         database: "novaVentaAppDev",
         synchronize: false,
         dropSchema: false,

@@ -16,7 +16,6 @@ export class User extends BaseEntity {
     @Column("varchar")
     email: string;
 
-    @Field(type => String)
     @Column("text")
     password: string;
 
