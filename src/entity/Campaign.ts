@@ -12,12 +12,12 @@ export class Campaign extends BaseEntity {
     @Column("varchar")
     name: string;
 
-    @Field(type => Date)
-    @Column({ type: "timestamp", default: null, nullable: true })
+    @Field(type => String)
+    @Column({ type: "date", default: null, nullable: true })
     startDate: Date;
 
-    @Field(type => Date)
-    @Column({ type: "timestamp", default: null, nullable: true })
+    @Field(type => String)
+    @Column({ type: "date", default: null, nullable: true })
     endDate: Date;
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

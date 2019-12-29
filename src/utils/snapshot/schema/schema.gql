@@ -17,8 +17,8 @@ input BuyerInput {
 type Campaign {
   id: ID!
   name: String!
-  startDate: DateTime!
-  endDate: DateTime!
+  startDate: String!
+  endDate: String!
 }
 
 input CampaignInput {
@@ -52,6 +52,8 @@ type Mutation {
   updateOrderItem(input: UpdateOrderItemInput!, id: Float!): OrderItem
   register(input: UserInput!): Boolean!
   login(password: String!, email: String!): LoginResponse!
+  createPayment(input: PaymentInput!): Boolean!
+  deletePayment(id: Float!): Boolean!
 }
 
 type OrderItem {
@@ -87,6 +89,25 @@ input OrderItemInput {
   userId: Int!
 }
 
+type Payment {
+  id: ID!
+  campaign: Campaign
+  vendor: Vendor
+  buyer: Buyer
+  user: User
+  date: String!
+  note: String!
+}
+
+input PaymentInput {
+  date: DateTime!
+  note: String!
+  campaignId: Int!
+  vendorId: Int!
+  buyerId: Int!
+  userId: Int!
+}
+
 type Query {
   getAllCampaigns: [Campaign!]
   getCampaignById(id: Float!): Campaign
@@ -97,6 +118,8 @@ type Query {
   getAllOrderItems: [OrderItem!]
   getOrderItemById(id: Float!): OrderItem
   profile(id: Float!): User
+  getAllPayments(campaignId: Float = null): [Payment!]
+  getPaymentById(id: Float!): Payment
 }
 
 input UpdateOrderItemInput {

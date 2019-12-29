@@ -58,7 +58,7 @@ export class OrderItem extends BaseEntity {
     price: number;
 
     @Field(type => Date)
-    @Column("timestamp", { default: null, nullable: true })
+    @Column({ type: "date", default: null, nullable: true })
     date: Date;
 
     @Field(type => String)
