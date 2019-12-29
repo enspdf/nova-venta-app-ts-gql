@@ -13,7 +13,7 @@ import { Container } from "typedi";
 import { redis } from "./utils/Redis";
 import { createSchema } from "./utils/CreateSchema";
 import { createTypeOrmConnection } from "./utils/CreateTypeOrmConnection";
-import { setupErrorHandling } from "./utils/Shutdown";
+// import { setupErrorHandling } from "./utils/Shutdown";
 import { logManager } from "./utils/LogManager";
 
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -60,10 +60,10 @@ useContainer(Container);
 
     const PORT = process.env.PORT || 4000;
 
-    //const { url } = await server.listen(PORT);
-    //console.log(`Server available at ${url}`);
+    const { url } = await server.listen(PORT);
+    console.log(`Server available at ${url}`);
 
-    const nodeServer = server.listen({ port: PORT, }, () => {
+    /*const nodeServer = server.listen({ port: PORT, }, () => {
         console.log(`Server available at http://localhost:${PORT}${server.graphqlPath}`);
     });
 
@@ -72,5 +72,5 @@ useContainer(Container);
         redisClient: redis,
         logger: logger,
         nodeServer: (await nodeServer).server
-    });
+    });*/
 })();
