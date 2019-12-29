@@ -68,7 +68,7 @@ type OrderItem {
   quantity: Int
   cost: Float
   price: Float
-  date: DateTime!
+  date: String!
   note: String!
   receive: Boolean!
 }

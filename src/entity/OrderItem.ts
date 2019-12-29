@@ -57,7 +57,7 @@ export class OrderItem extends BaseEntity {
     @Column("decimal", { precision: 5, scale: 2 })
     price: number;
 
-    @Field(type => Date)
+    @Field(type => String)
     @Column({ type: "date", default: null, nullable: true })
     date: Date;
 
